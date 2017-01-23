@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Applied Data Science, progamming and machine learning projects">
+    <meta name="author" content="Ernest Tavares">
+    <link rel="icon" href="../favicon.ico">
+
+    <title>Animal Shelter Classifier using Random Forest - Projects</title>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="../theme/js/jquery.min.js"><\/script>')
+    </script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../theme/css/bootstrap.css" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="../theme/css/ie10-viewport-bug-workaround.css" />
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../theme/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/css/notebooks.css" />
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700|Roboto:400,500,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     <link href="etav.github.io/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Ernest Tavares III Full RSS Feed" />        
+
+
+
+</head>
+
+<body>
+
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="..">Ernest Tavares III</a>
+            </div>
+            <div class="navbar-collapse collapse" id="searchbar">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../pages/about.html">About Ernest</a></li>
+                            <li><a href="https://www.linkedin.com/in/ernesttavares">LinkedIn</a></li>
+                            <li><a href="https://twitter.com/etav3">Twitter</a></li>
+                            <li><a href="https://github.com/etav/">GitHub</a></li>
+                            <li><a href="https://www.instagram.com/nomad94/">Instagram</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Science<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="..#Python">Python</a></li>
+                            <li><a href="..#R_Stats">R Stats</a></li>
+                            <li><a href="..#Machine_Learning">Machine Learning</a></li>
+                            <li><a href="..#Articles">Articles</a></li>
+                            <li><a href="..#Projects">Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://github.com/etav/animal_shelter">Animal Shelter + Random Forest</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="../feeds/all.rss.xml">Feed</a>
+                    </li>
+
+
+                </ul>
+
+                <form class="navbar-form" action="../search.html" onsubmit="return validateForm(this.elements['q'].value);">
+                    <div class="form-group" style="display:inline;">
+                        <div class="input-group" style="display:table;">
+                            <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
+                            <input class="form-control search-query" name="q" id="tipue_search_input" placeholder="e.g. scikit KNN, pandas merge" required autocomplete="off" type="text">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+
+
+    <!-- end of header section -->
+    <div class="container">
+<!-- <div class="alert alert-warning" role="alert">
+    Did you find this page useful? Please do me a quick favor and <a href="#" class="alert-link">endorse me for data science on LinkedIn</a>.
+</div> -->
+<section id="content" class="body">
+    <header>
+    <h1>
+      Animal Shelter Classifier using Random Forest
+    </h1>
+<ol class="breadcrumb">
+    <li>
+        <time class="published" datetime="2016-03-15T10:20:00-07:00">
+            15 March 2016
+        </time>
+    </li>
+    <li>Projects</li>
+</ol>
+</header>
+<div class='article_content'>
+<h1>Animal Shelter</h1>
+<h3>The Dataset</h3>
+<p>Some R code for a kaggle competition I entered. The goal was to create a classifier to predict the outcome of a sheltered animal using features such the animal's gender, age and breed. The training dataset contains 26,729 observations, 9 predictor variables and was given to us by the Austin Animal Shelter.</p>
+<h3>Exploratory Analysis</h3>
+<p>Before I dive into creating a classifier, I typically perform an exploratory analysis moving from observing one univariate statistics to bivariate statistics and finally model building.</p>
+<p>However, I broke from my normal process as curiosity got the best of me. I was interested in learning about what the typical outcomes are for sheltered animals (check out the graph below).</p>
+<p><img alt="Image of Outcomes" src="https://github.com/etav/animal_shelter/blob/master/img/outcomes_by_animal.png"></p>
+<p>Luckily, as we see above, many animals are either adopted, transferred or in the case of dogs frequently returned to their owners.  </p>
+<h3>The Variables</h3>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;ID&quot;</span>             <span class="s">&quot;Name&quot;</span>           <span class="s">&quot;DateTime&quot;</span>       <span class="s">&quot;OutcomeType&quot;</span>    <span class="s">&quot;OutcomeSubtype&quot;</span> <span class="s">&quot;AnimalType&quot;</span>    
+ <span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="s">&quot;SexuponOutcome&quot;</span> <span class="s">&quot;AgeuponOutcome&quot;</span> <span class="s">&quot;Breed&quot;</span>          <span class="s">&quot;Color&quot;</span>    
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th>Variable Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>The animal's unique ID.</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>The animal's name, if known (many are not).</td>
+</tr>
+<tr>
+<td>DateTime</td>
+<td>The date and time the animal entered the shelter (ranges from 1/1/14 - 9/9/15).</td>
+</tr>
+<tr>
+<td>OutcomeType</td>
+<td>A five factor variable detailing the outcome for the animal (ie: adopted,transferred, died).</td>
+</tr>
+<tr>
+<td>OutcomeSubtype</td>
+<td>17 factor variable containing Further details related to the outcome of the animal, such as whether or not they were aggressive.</td>
+</tr>
+<tr>
+<td>AnimalType</td>
+<td>Whether the animal is a cat or dog.</td>
+</tr>
+<tr>
+<td>SexuponOutcome</td>
+<td>The sex of the animal at the time the outcome was recorded.</td>
+</tr>
+<tr>
+<td>AgeuponOutcome</td>
+<td>The age of the animal when the outcome was recorded.</td>
+</tr>
+<tr>
+<td>Breed</td>
+<td>The breed of the animal (contains mixed breed).</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>A Description of the coloring on the animal.</td>
+</tr>
+</tbody>
+</table>
+<h3>Transforming Variables</h3>
+<p>The first thing I did was transform the date variable by separating time and date so that I can analyze them independently, I'd like to be able to compare time of day and any seasonality effects on adoption. I then moved on to address missing name values (there were a few mis-codings which caused errors). After that I moved onto transforming the "AgeuponOutcome" variable so that the reported age of animals would all be in the same units, I chose days. This took some chaining of ifelse statements:</p>
+<h4>Animal's Age</h4>
+<div class="highlight"><pre><span></span><span class="c1">#Animal Age</span>
+<span class="kp">split</span><span class="o">&lt;-</span>str_split_fixed<span class="p">(</span>train<span class="o">$</span>AgeuponOutcome<span class="p">,</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="c1"># split value and unit of time</span>
+<span class="kp">split</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">&lt;-</span><span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;s&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="kp">split</span><span class="p">[,</span><span class="m">2</span><span class="p">])</span> <span class="c1">#remove tailing &quot;s&quot;</span>
+
+<span class="c1">#create a vector to multiply</span>
+multiplier <span class="o">&lt;-</span> <span class="kp">ifelse</span><span class="p">(</span><span class="kp">split</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;day&#39;</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span>
+                     <span class="kp">ifelse</span><span class="p">(</span><span class="kp">split</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;week&#39;</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span>
+                            <span class="kp">ifelse</span><span class="p">(</span><span class="kp">split</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;month&#39;</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span>  
+                                   <span class="kp">ifelse</span><span class="p">(</span><span class="kp">split</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;year&#39;</span><span class="p">,</span> <span class="m">365</span><span class="p">,</span> <span class="kc">NA</span><span class="p">))))</span>
+
+train<span class="o">$</span>days_old <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">split</span><span class="p">[,</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span> multiplier <span class="c1">#apply the multiplier</span>
+train<span class="o">$</span>days_old<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span> <span class="c1">#compare, looks good</span>
+train<span class="o">$</span>AgeuponOutcome<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span>
+</pre></div>
+
+
+<p>After this transformation, we're able to create a visualization which tells us the outcome of each animal type as a function of its age (in days).</p>
+<p><img alt="Image of Age&amp;Outcomes" src="https://github.com/etav/animal_shelter/blob/master/img/age&amp;outcome.png"></p>
+<p>Interestingly the likelihood of being adopted for cats varies with age whereas for dogs there appears to be a slight negative correlation between a it's age and the probability it will be adopted.</p>
+<p>For dogs, it seems older animals tend to have a higher likelihood of being returned to their owner (I assume this is has to do with the proliferation of chips for animals)</p>
+<h4>Animal's Gender</h4>
+<p>Moving on I decided to compare the differences in outcomes based on the animal's gender. It's clear that adopters favor animals (both cats and dogs) that have previously been neutered. It's interesting to note that a large proportion of cats which were not neutered are transferred to another animal shelter, where (my guess is) they are then neutered.</p>
+<p><img alt="Image of Sex&amp;Outcomes" src="https://github.com/etav/animal_shelter/blob/master/img/outcome_by_sex.png"></p>
+<h3>Applying Random Forest</h3>
+<p>After transforming our variables, performing univariate analysis and determining the validity of our sample, it's finally time to move to model building. I will create a random forest using the RandomForest package, using OutcomeType as our predictor variable (remember there are five levels, which complicates things a bit).</p>
+<div class="highlight"><pre><span></span>rf1 <span class="o">&lt;-</span> randomForest<span class="p">(</span>OutcomeType<span class="o">~</span>AnimalType<span class="o">+</span>SexuponOutcome<span class="o">+</span>Named<span class="o">+</span>days_old<span class="o">+</span>young<span class="o">+</span>color_simple<span class="p">,</span>
+                    data<span class="o">=</span>train<span class="p">,</span>importance<span class="o">=</span><span class="bp">T</span><span class="p">,</span> ntree<span class="o">=</span><span class="m">500</span><span class="p">,</span> na.action<span class="o">=</span>na.fail<span class="p">)</span>
+rf1
+</pre></div>
+
+
+<p><img alt="Image of RF_Error" src="https://github.com/etav/animal_shelter/blob/master/img/RF_Error.png"></p>
+<p>Our random forest model does poorly at classifying animal deaths which makes sense  when we consider only 197/26729
+or 0.007370272% of our training set were flagged as "Died". The model does fairly well at predicting instances where an adoption, transfer, or euthanasia occurs which make up the bulk of the training set. Furthermore, our OOB or out of bag error estimate is  35.28%.</p>
+<p>Here's a detailed breakdown of our Random Forest:</p>
+<div class="highlight"><pre><span></span><span class="c1">#Calling Random Forest</span>
+Call<span class="o">:</span>
+ randomForest<span class="p">(</span>formula <span class="o">=</span> OutcomeType <span class="o">~</span> AnimalType<span class="o">+</span>SexuponOutcome<span class="o">+</span>Named<span class="o">+</span>days_old<span class="o">+</span>young<span class="o">+</span>color_simple<span class="p">,</span> data <span class="o">=</span> train<span class="p">,</span> importance <span class="o">=</span> <span class="bp">T</span><span class="p">,</span>      ntree <span class="o">=</span> <span class="m">500</span><span class="p">,</span> na.action <span class="o">=</span> na.fail<span class="p">)</span>
+               Type of random forest<span class="o">:</span> classification
+                     Number of trees<span class="o">:</span> <span class="m">500</span>
+No. of variables tried at each <span class="kp">split</span><span class="o">:</span> <span class="m">2</span>
+
+        OOB estimate of  error rate<span class="o">:</span> <span class="m">35.28</span>%
+Confusion <span class="kt">matrix</span><span class="o">:</span>
+                Adoption Died Euthanasia Return_to_owner Transfer class.error
+Adoption            <span class="m">8988</span>    <span class="m">0</span>          <span class="m">2</span>            <span class="m">1391</span>      <span class="m">388</span>   <span class="m">0.1653821</span>
+Died                  <span class="m">21</span>    <span class="m">0</span>         <span class="m">10</span>              <span class="m">10</span>      <span class="m">156</span>   <span class="m">1.0000000</span>
+Euthanasia           <span class="m">229</span>    <span class="m">0</span>        <span class="m">175</span>             <span class="m">380</span>      <span class="m">771</span>   <span class="m">0.8874598</span>
+Return_to_owner     <span class="m">1998</span>    <span class="m">0</span>          <span class="m">9</span>            <span class="m">2393</span>      <span class="m">386</span>   <span class="m">0.5000000</span>
+Transfer            <span class="m">2641</span>    <span class="m">0</span>         <span class="m">83</span>             <span class="m">954</span>     <span class="m">5744</span>   <span class="m">0.3903630</span>
+</pre></div>
+
+
+<h3>Determining Variable Importance</h3>
+<p>Finally, we'll rank our predictor variables based on their mean reduction in Gini error.</p>
+<p><img alt="Image of var_importance" src="https://github.com/etav/animal_shelter/blob/master/img/var_importance.png"></p>
+<p>As we see in the graphic above, the animal's sex and age were most useful to reduce the mean Gini Error. Interestingly, animal type (ie: cat or dog) and the physical features of the animal such as the color mattered less.</p>
+<p>That's all for this one folks, thanks for tuning in!</p>
+</div>
+    <aside>
+    <div class="bug-reporting__panel">
+        <h3>Find an error or bug? Have a suggestion?</h3>
+        <p>Everything on this site is avaliable on GitHub. Head on over and <a href='https://github.com/etav/'>submit an issue.</a> You can also message me directly on <a href='https://twitter.com/etav'>Twitter</a>.</p>
+    </div>
+    </aside>
+</section>
+
+    </div>
+    <!-- start of footer section -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                <center>This project contains 5 pages and is available on <a href="https://github.com/etav/">GitHub</a>.
+                <br/>
+                Copyright &copy; Ernest Tavares III,
+                    <time datetime="2017">2017</time>.
+                </center>
+            </p>
+        </div>
+    </footer>
+
+    <!-- This jQuery line finds any span that contains code highlighting classes and then selects the parent <pre> tag and adds a border. This is done as a workaround to visually distinguish the code inputs and outputs -->
+    <script>
+        $( ".hll, .n, .c, .err, .k, .o, .cm, .cp, .c1, .cs, .gd, .ge, .gr, .gh, .gi, .go, .gp, .gs, .gu, .gt, .kc, .kd, .kn, .kp, .kr, .kt, .m, .s, .na, .nb, .nc, .no, .nd, .ni, .ne, .nf, .nl, .nn, .nt, .nv, .ow, .w, .mf, .mh, .mi, .mo, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .bp, .vc, .vg, .vi, .il" ).parent( "pre" ).css( "border", "1px solid #DEDEDE" );
+    </script>
+
+    <!-- Load Google Analytics -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-66582-32', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End of Google Analytics -->
+
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../theme/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../theme/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+</html>
