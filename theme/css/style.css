@@ -91,7 +91,7 @@ body > .container {
 }
 
 .navbar .navbar-brand:hover {
-  background: #ef322b;
+  background: #3498DB;
 }
 
 
@@ -121,7 +121,7 @@ body > .container {
 }
 
 .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
-  background-color: #ef322b;
+  background-color: #3498DB;
 }
 
 .navbar-nav > li > a:focus{
@@ -130,7 +130,7 @@ body > .container {
 
 
 .nav .dropdown.open > a, .nav .dropdown.open > a:hover, .nav .dropdown.open > a:focus {
-    background-color: #ef322b;
+    background-color: #3498DB;
 }
 
 .dropdown-menu {
@@ -307,7 +307,7 @@ h6,
     line-height: 1;
     color: #fff;
     text-align: center;
-    background-color: #ec352f;
+    background-color: #3498DB;
     border: 0px solid #ccc;
     border-radius: 0px;
 }
