@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://etav.github.io/</loc>
-<lastmod>2017-03-06T18:43:56-00:00</lastmod>
+<lastmod>2017-03-08T06:58:48-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -25,15 +25,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://etav.github.io/data_visualization/bokeh_basic_interative_plotting.html</loc>
-<lastmod>2017-03-06T18:39:31-08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://etav.github.io/python/bokeh_interactive_plots_pt1.html</loc>
-<lastmod>2017-03-06T05:33:00-08:00</lastmod>
+<loc>https://etav.github.io/python/vif_factor_python.html</loc>
+<lastmod>2017-03-08T06:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
