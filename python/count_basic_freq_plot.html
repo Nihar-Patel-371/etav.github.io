@@ -223,23 +223,23 @@ Name: class, dtype: int64
 </pre></div>
 
 
-<p><img alt="png" src="output_6_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_6_1.png"></p>
 <p>I think a bar graph would be more useful, visually.</p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img alt="png" src="output_8_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_8_1.png"></p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;barh&#39;</span><span class="p">)</span> <span class="c1">#horizontal bar plot</span>
 </pre></div>
 
 
-<p><img alt="png" src="output_9_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_9_1.png"></p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;barh&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span> <span class="c1">#horizontal bar plot</span>
 </pre></div>
 
 
-<p><img alt="png" src="output_10_0.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_10_0.png"></p>
 <p>There you have it, a ranked bar plot for categorical data in just 1 line of code using python!</p>
 <h2>Histograms for Numberical Data</h2>
 <p>You know how to graph categorical data, luckily graphing numerical data is even easier using the <code>hist()</code> function.</p>
@@ -247,22 +247,22 @@ Name: class, dtype: int64
 </pre></div>
 
 
-<p><img alt="png" src="output_13_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_13_1.png"></p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="c1">#add granularity</span>
 </pre></div>
 
 
-<p><img alt="png" src="output_15_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_15_1.png"></p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> <span class="c1">#add granularity &amp; range</span>
 </pre></div>
 
 
-<p><img alt="png" src="output_16_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_16_1.png"></p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span> <span class="c1">#add granularity &amp; range &amp; color</span>
 </pre></div>
 
 
-<p><img alt="png" src="output_17_1.png"></p>
+<p><img alt="png" src="/images/counting_basic_plots/output_17_1.png"></p>
 <p>There you have it, a stylized histogram for numerical data using python in 1 compact line of code.</p>
 </div>
     <aside>
