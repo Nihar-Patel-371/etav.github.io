@@ -10,7 +10,7 @@
     <meta name="author" content="Ernest Tavares">
     <link rel="icon" href="../favicon.ico">
 
-    <title>Importing a CSV Into Pandas - Python</title>
+    <title>Counting and Basic Frequency Plots - Python</title>
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -112,12 +112,12 @@
 <section id="content" class="body">
     <header>
     <h1>
-      Importing a CSV Into Pandas
+      Counting and Basic Frequency Plots
     </h1>
 <ol class="breadcrumb">
     <li>
-        <time class="published" datetime="2017-01-14T03:20:00-08:00">
-            14 January 2017
+        <time class="published" datetime="2017-03-22T08:31:00-07:00">
+            22 March 2017
         </time>
     </li>
     <li>Python</li>
@@ -125,18 +125,12 @@
 </ol>
 </header>
 <div class='article_content'>
-<p>Import necessary modules</p>
+<p>Counting is an essential task required for most analysis projects. The ability to  take counts and visualize them  graphically using frequency plots (histograms) enables the analyst to easily recognize patterns and relationships within the data. Good news is this can be accomplished using python with <strong>just 1 line of code!</strong></p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-</pre></div>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 
-
-<p>Create a toy dataframe (to be converted into csv)</p>
-<div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;Ernest&#39;</span><span class="p">,</span> <span class="s1">&#39;Jason&#39;</span><span class="p">,</span> <span class="s1">&#39;Kevin&#39;</span><span class="p">,</span> <span class="s1">&#39;Christine&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;job&#39;</span><span class="p">:[</span><span class="s1">&#39;Analyst&#39;</span><span class="p">,</span> <span class="s1">&#39;Nerd&#39;</span><span class="p">,</span> <span class="s1">&#39;Teacher&#39;</span><span class="p">,</span> <span class="s1">&#39;Product Manager&#39;</span><span class="p">],</span>
-       <span class="s1">&#39;salary&#39;</span><span class="p">:[</span><span class="s1">&#39;$60,000&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;$70,000&#39;</span><span class="p">,</span><span class="s1">&#39;$80,000&#39;</span><span class="p">]}</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;job&#39;</span><span class="p">,</span><span class="s1">&#39;salary&#39;</span><span class="p">])</span>
-<span class="n">df</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;iris-data.csv&#39;</span><span class="p">)</span> <span class="c1">#toy dataset</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 
@@ -145,96 +139,131 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>name</th>
-      <th>job</th>
-      <th>salary</th>
+      <th>sepal_length_cm</th>
+      <th>sepal_width_cm</th>
+      <th>petal_length_cm</th>
+      <th>petal_width_cm</th>
+      <th>class</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Ernest</td>
-      <td>Analyst</td>
-      <td>$60,000</td>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Jason</td>
-      <td>Nerd</td>
-      <td></td>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Kevin</td>
-      <td>Teacher</td>
-      <td>$70,000</td>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Christine</td>
-      <td>Product Manager</td>
-      <td>$80,000</td>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-<p>Export the dataframe to a csv in the current directory</p>
-<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;career_info.csv&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 
 
-<p>Now, load the csv</p>
-<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;career_info.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class="highlight"><pre><span></span>0    Iris-setosa
+1    Iris-setosa
+2    Iris-setosa
+3    Iris-setosa
+4    Iris-setosa
+Name: class, dtype: object
 </pre></div>
 
 
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>name</th>
-      <th>job</th>
-      <th>salary</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>Ernest</td>
-      <td>Analyst</td>
-      <td>$60,000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>Jason</td>
-      <td>Nerd</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>Kevin</td>
-      <td>Teacher</td>
-      <td>$70,000</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>Christine</td>
-      <td>Product Manager</td>
-      <td>$80,000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<h2>Frequency Plot for Categorical Data</h2>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="c1">#generate counts</span>
+</pre></div>
 
-<p>Notice Pandas conveniently pulls in the header information without needing specification</p>
+
+<div class="highlight"><pre><span></span>Iris-virginica     50
+Iris-setosa        49
+Iris-versicolor    45
+versicolor          5
+Iris-setossa        1
+Name: class, dtype: int64
+</pre></div>
+
+
+<p>Notice that the <code>value_counts()</code> function automatically provides the classes in decending order. Let's bring it to life with a frequency plot.</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_6_1.png"></p>
+<p>I think a bar graph would be more useful, visually.</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_8_1.png"></p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;barh&#39;</span><span class="p">)</span> <span class="c1">#horizontal bar plot</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_9_1.png"></p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;barh&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span> <span class="c1">#horizontal bar plot</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_10_0.png"></p>
+<p>There you have it, a ranked bar plot for categorical data in just 1 line of code using python!</p>
+<h2>Histograms for Numberical Data</h2>
+<p>You know how to graph categorical data, luckily graphing numerical data is even easier using the <code>hist()</code> function.</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span> <span class="c1">#horizontal bar plot</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_13_1.png"></p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="c1">#add granularity</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_15_1.png"></p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> <span class="c1">#add granularity &amp; range</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_16_1.png"></p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal_length_cm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span> <span class="c1">#add granularity &amp; range &amp; color</span>
+</pre></div>
+
+
+<p><img alt="png" src="output_17_1.png"></p>
+<p>There you have it, a stylized histogram for numerical data using python in 1 compact line of code.</p>
 </div>
     <aside>
     <div class="bug-reporting__panel">

@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://etav.github.io/</loc>
-<lastmod>2017-03-11T18:48:21-00:00</lastmod>
+<lastmod>2017-03-22T08:41:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -20,6 +20,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://etav.github.io/projects/random_forest_college_admissions.html</loc>
 <lastmod>2017-04-03T10:20:00-07:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://etav.github.io/python/count_basic_freq_plot.html</loc>
+<lastmod>2017-03-22T08:31:00-07:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://etav.github.io/python/python_pandas_rows_cols.html</loc>
+<lastmod>2017-03-22T08:20:00-07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
