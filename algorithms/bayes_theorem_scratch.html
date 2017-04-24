@@ -10,7 +10,7 @@
     <meta name="author" content="Ernest Tavares">
     <link rel="icon" href="../favicon.ico">
 
-    <title>Machine Learning Supervision Optional - Articles</title>
+    <title>Implementing Bayes' Theorem from Scratch - Algorithms</title>
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -111,47 +111,97 @@
 <section id="content" class="body">
     <header>
     <h1>
-      Machine Learning Supervision Optional
+      Implementing Bayes' Theorem from Scratch
     </h1>
 <ol class="breadcrumb">
     <li>
-        <time class="published" datetime="2017-01-01T12:00:00-08:00">
-            01 January 2017
+        <time class="published" datetime="2017-04-23T05:20:00-07:00">
+            23 April 2017
         </time>
     </li>
-    <li>Articles</li>
+    <li>Algorithms</li>
 </ol>
 </header>
 <div class='article_content'>
-<p>Machine learning is defined as a subfield of computer science and artificial intelligence which “gives computers the ability to learn without being explicitly programmed” <a href="https://en.wikipedia.org/wiki/Machine_learning">(source)</a>.</p>
-<p>Although the statistical techniques which underpin machine learning have existed for decades recent developments in technology such as the availability/affordability of cloud computing and the ability to store and manipulate big data have accelerated its adoption. This essay is meant to explore the most popular methods currently being employed by data scientists such as supervised and unsupervised methods to people with little to no understanding of the field.</p>
-<p><img alt="svm" src="https://cdn-images-1.medium.com/max/1600/1*XwNZplJ1p-xnUKRQPMS6Aw.png">
-<em>(An example of a support vector machine (SVM) algorithm being used to create a decision boundary (via <a href="https://upload.wikimedia.org/wikipedia/commons/1/1b/Kernel_Machine.png">wikipedia</a>)</em></p>
-<h3>Supervised</h3>
-<p><a href="https://en.wikipedia.org/wiki/Supervised_learning">Supervised</a> machine learning describes an instance where inputs along with the outputs are known. We know the beginning and the end of the story and the challenge is to find a function (story teller, if you will) which best approximates the output in a generalizable fashion.</p>
-<p><strong>Example</strong>: <em>Imagine a doctor trying to predict whether someone has HIV. He has the test results (outputs) and medical records (variables) for patients who have tested positive and negative for the disease. His task is to look at the records and develop a decisioning system so that when a new patient arrives, given just their medical record (variables) he can accurately predict whether or not they are HIV positive.</em></p>
-<p><img alt="HIV" src="https://cdn-images-1.medium.com/max/1600/1*jp5iGkseBEqa4nKHFf2XFQ.jpeg">
-<em>(A graphic represention a logistic regression)</em></p>
-<h3>Unsupervised</h3>
-<p><a href="https://en.wikipedia.org/wiki/Unsupervised_learning">Unsupervised</a> machine learning is a bit more abstract because it describes a scenario in which only know the input variables are known but nothing about the outputs are known. A typical task for this type of machine learning is <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>, or grouping the data by using features, to arrive at generalizable insights.</p>
-<p><img alt="kNN" src="https://cdn-images-1.medium.com/max/1600/1*vNng_oOsNRHKrlh3pjSAyA.png">
-<em>Clustering using K-Nearest Neighbors algorithm</em></p>
-<h3>Semi-Supervised</h3>
-<p><a href="https://en.wikipedia.org/wiki/Semi-supervised_learning">Semi-supervised</a> learning is a hybrid of <em>supervised and unsupervised machine learning</em>. This describes a scenario where there is a small portion of labeled data mixed with unlabeled data. Acquiring labeled data is costly because typically it requires manual input from humans to generate. Semi-supervised learning allows for quicker turn-around while sacrificing accuracy (increasing labeled data increases model accuracy) but it is usually more accurate than unsupervised learning alone.</p>
-<h3>Reinforcement learning</h3>
-<p><a href="https://en.wikipedia.org/wiki/Reinforcement_learning">Reinforcement learning</a>, or simulation based optimization is a relatively lesser known branch of machine learning but where the future of AI is headed because it requires <strong>almost no human input</strong>. It’s also what enabled Google’s Alpha Go to be so successful—and which we’ll use for illustrative purposes <em>(here’s the <a href="http://www.nature.com/nature/journal/v529/n7587/full/nature16961.html">research paper</a>)</em>.</p>
-<p><img alt="Go" src="https://cdn-images-1.medium.com/max/1600/1*3YbBSEJ8MZxx6GBK_Io28w.jpeg"></p>
-<p><strong>Reinforcement learning</strong> describes a situation in which humans provide the following:</p>
-<ol>
-<li>An environment (A Go board)</li>
-<li>A set of rules (The rules of Go)</li>
-<li>A Set of actions (All the actions that can be taken)</li>
-<li>A set of outcomes (Win or lose)</li>
-</ol>
-<p><em>Then given an environment, rules,  actions and outcomes a computer can repeatedly simulate many, many games of Go and "learn" (optimzie) for what strategies work best in a given scenario.</em></p>
-<p>What makes reinforcement learning extremely powerful is the sheer number of times a computer can simulate unique games. By the time Alpha Go faced Lee Sedol, the top player in the world, it had simulated more games than Sedol could’ve ever hoped to play in his lifetime. Humans need to eat, sleep and take breaks, computers don’t they just require electricity.
-There you have it, a quick and dirty overview of some of the more popular machine learning methods currently being employed.</p>
-<p>Follow me on <a href="https://medium.com/@ernestt">medium</a> to show your support!</p>
+<h2>Implementing Bayes Theorem from Scratch</h2>
+<p>Baye's theorem calculates the probability of a given class or state given the joint-probability distribution of the input variables (betas). There are numerous libraries which take care of this for us which are native to python and R but in order to understand what's happening "behind the scenes" we'll use bayes theorem to calculate join probability distributions from scratch.</p>
+<p>Here we'll create a ficticuous world in which we're a doctor testing patients for HIV, given these assumptions:</p>
+<p><strong><code>P(HIV)</code></strong> = The odds of a person having HIV is .015 or 1.5%</p>
+<p><strong><code>P(Positive)</code></strong> = The probability the test results are positive</p>
+<p><strong><code>P(Negative)</code></strong> = The probability the test results are negative.</p>
+<p><strong><code>P(Positive | HIV)</code></strong> = The probability the test results are positive given someone has HIV. This is also called Sensitivity or True Positive Rate. We'll assume the test is correct .95 or 95% of the time.</p>
+<p><strong><code>P(Positive | ~HIV)</code></strong> = The probability the test results are positive given someone does not have HIV. This is also called Specificity or True Negative Rate. We'll assume this is also correct .95 or 95% of the time.</p>
+<p>Baye's Formula:</p>
+<p><img alt="img" src="http://www.idgconnect.com/IMG/313/9313/formula-image.jpg"></p>
+<p>Where:
+- <code>P(A)</code> is the prior probability of A occuring independently, for us this is <code>P(HIV)</code>.
+- <code>P(B)</code> is the prior probability of B occuring independently, for us this is <code>P(Positive)</code>.
+- <code>P(A|B)</code> is the posterior probability of A occuring given B occurs, for us this is <code>P(HIV | Positive)</code>. This is the probability that an individual has HIV given their test results are positive and what we're trying to calculate.
+- <code>P(B|A)</code> is the likelihood probability of B occuring, given A occus. In our example this is <code>P(Positive | HIV)</code>. This value is given to us.</p>
+<p>Strining these together we get:</p>
+<p><code>P(HIV | Positive) = ((P(HIV) * P(Positive | HIV)) / P(Positive)</code></p>
+<p>Thus the probability of getting a positive HIV test result <code>P(HIV)</code> becomes:</p>
+<p><code>P(Positive) = [P(HIV) * Sensitivity] + [P(~HIV) * (1-Specificity)]</code></p>
+<h2>Calculations - Priors</h2>
+<div class="highlight"><pre><span></span><span class="c1">#perfoming calculations:</span>
+
+<span class="n">p_hiv</span> <span class="o">=</span> <span class="o">.</span><span class="mo">015</span> <span class="c1">#P(HIV) assuming 1.5% of the population has HIV</span>
+
+<span class="n">p_no_hiv</span> <span class="o">=</span> <span class="o">.</span><span class="mi">98</span> <span class="c1"># P(~HIV)</span>
+
+<span class="n">p_positive_hiv</span> <span class="o">=</span> <span class="o">.</span><span class="mi">95</span> <span class="c1">#sensitivity</span>
+
+<span class="n">p_negative_hiv</span> <span class="o">=</span> <span class="o">.</span><span class="mi">95</span><span class="c1">#specificity</span>
+
+<span class="c1">#P(Positive)</span>
+<span class="n">p_positive</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_hiv</span> <span class="o">*</span> <span class="n">p_positive_hiv</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">p_no_hiv</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_negative_hiv</span><span class="p">))</span>
+<span class="k">print</span> <span class="s2">&quot;The probability of getting a positive test result is:&quot;</span><span class="p">,</span> <span class="n">p_positive</span><span class="p">,</span> <span class="s2">&quot;this is our prior&quot;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>The probability of getting a positive test result is: 0.06325 this is our prior
+</pre></div>
+
+
+<p>Using this prior we can calculate our posterior probalities as follows:</p>
+<p>The probability of an individual having HIV given their test result is positive.</p>
+<p><code>P(D|Positive) = (P(HIV) * Sensitivity)) / P(Positive)</code></p>
+<p>The probability of an individual not having HIV given their test result is positive.</p>
+<p><code>P(~D|Positive) = (P(~HIV) * (1-Sensitivity))) / P(Positive)</code></p>
+<p><strong>Note: the sum of posteriors must equal one because combined they capture all possible states within our set of probabilities.</strong></p>
+<h2>Calculations - Posteriors</h2>
+<div class="highlight"><pre><span></span><span class="c1">#P(HIV | Positive)</span>
+<span class="n">p_hiv_positive</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_hiv</span> <span class="o">*</span> <span class="n">p_positive_hiv</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_positive</span>
+
+<span class="k">print</span> <span class="s2">&quot;The probability of a person having HIV, given a positive test result is:&quot;</span><span class="p">,</span> <span class="n">p_hiv_positive</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>The probability of a person having HIV, given a positive test result is: 0.225296442688
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1">#P(~HIV | Positive)</span>
+<span class="n">p_positive_no_hiv</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p_positive_hiv</span>
+<span class="n">p_no_hiv_positive</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_no_hiv</span> <span class="o">*</span> <span class="n">p_positive_no_hiv</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_positive</span>
+
+<span class="k">print</span> <span class="s2">&quot;The probability of an individual not having HIV a positive test result is:&quot;</span><span class="p">,</span> <span class="n">p_no_hiv_positive</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>The probability of an individual not having HIV a positive test result is: 0.774703557312
+</pre></div>
+
+
+<h2>Conclusion</h2>
+<p>That's it! We've just demonstrated how to calculate Bayes theorem from scrath. In our toy example we showed that if an individual gets a positive test result the probability this individual has HIV is 22.5% and 77.5% that they do not have HIV. We can check the validity of our results by summing the probability of both cases:</p>
+<div class="highlight"><pre><span></span><span class="n">posterior_sum</span> <span class="o">=</span> <span class="n">p_no_hiv_positive</span> <span class="o">+</span> <span class="n">p_hiv_positive</span>
+<span class="n">posterior_sum</span> <span class="c1">#sum to 1, looks good!</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>1.0
+</pre></div>
 </div>
     <aside>
     <div class="bug-reporting__panel">
