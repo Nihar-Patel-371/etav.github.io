@@ -123,27 +123,27 @@
 </ol>
 </header>
 <div class='article_content'>
-<h2>Implementing Bayes Theorem from Scratch</h2>
-<p>Baye's theorem calculates the probability of a given class or state given the joint-probability distribution of the input variables (betas). There are numerous libraries which take care of this for us which are native to python and R but in order to understand what's happening "behind the scenes" we'll use bayes theorem to calculate join probability distributions from scratch.</p>
-<p>Here we'll create a ficticuous world in which we're a doctor testing patients for HIV, given these assumptions:</p>
+<h2>Implementing Bayes' Theorem from Scratch</h2>
+<p>Bayes' theorem calculates the probability of a given class or state given the joint-probability distribution of the input variables (betas). There are numerous libraries which take care of this for us which are native to python and R but in order to understand what's happening "behind the scenes" we'll use Bayes' Theorem to calculate join probability distributions from scratch.</p>
+<p>Here we'll create a fictitious world in which we're a doctor testing patients for HIV, subject to the following assumptions:</p>
 <p><strong><code>P(HIV)</code></strong> = The odds of a person having HIV is .015 or 1.5%</p>
 <p><strong><code>P(Positive)</code></strong> = The probability the test results are positive</p>
 <p><strong><code>P(Negative)</code></strong> = The probability the test results are negative.</p>
 <p><strong><code>P(Positive | HIV)</code></strong> = The probability the test results are positive given someone has HIV. This is also called Sensitivity or True Positive Rate. We'll assume the test is correct .95 or 95% of the time.</p>
-<p><strong><code>P(Positive | ~HIV)</code></strong> = The probability the test results are positive given someone does not have HIV. This is also called Specificity or True Negative Rate. We'll assume this is also correct .95 or 95% of the time.</p>
-<p>Baye's Formula:</p>
+<p><strong><code>P(Negative | ~HIV)</code></strong> = The probability the test results are negative given someone does not have HIV. This is also called Specificity or True Negative Rate. We'll assume this is also correct .95 or 95% of the time.</p>
+<p>Bayes' Formula:</p>
 <p><img alt="img" src="http://www.idgconnect.com/IMG/313/9313/formula-image.jpg"></p>
 <p>Where:
-- <code>P(A)</code> is the prior probability of A occuring independently, for us this is <code>P(HIV)</code>.
-- <code>P(B)</code> is the prior probability of B occuring independently, for us this is <code>P(Positive)</code>.
-- <code>P(A|B)</code> is the posterior probability of A occuring given B occurs, for us this is <code>P(HIV | Positive)</code>. This is the probability that an individual has HIV given their test results are positive and what we're trying to calculate.
-- <code>P(B|A)</code> is the likelihood probability of B occuring, given A occus. In our example this is <code>P(Positive | HIV)</code>. This value is given to us.</p>
-<p>Strining these together we get:</p>
+<code>P(A)</code> is the prior probability of A occurring independently, for us this is <code>P(HIV)</code>.</p>
+<p><code>P(B)</code> is the prior probability of B occurring independently, for us this is <code>P(Positive)</code>.</p>
+<p><code>P(A|B)</code> is the posterior probability of A occurring given B occurs, for us this is <code>P(HIV | Positive)</code>. This is the probability that an individual has HIV given their test results are positive and what we're trying to calculate.</p>
+<p><code>P(B|A)</code> is the likelihood probability of B occurring, given A occurs. In our example this is <code>P(Positive | HIV)</code>. This value is given to us.</p>
+<p>Stringing these together we get:</p>
 <p><code>P(HIV | Positive) = ((P(HIV) * P(Positive | HIV)) / P(Positive)</code></p>
 <p>Thus the probability of getting a positive HIV test result <code>P(HIV)</code> becomes:</p>
 <p><code>P(Positive) = [P(HIV) * Sensitivity] + [P(~HIV) * (1-Specificity)]</code></p>
 <h2>Calculations - Priors</h2>
-<div class="highlight"><pre><span></span><span class="c1">#perfoming calculations:</span>
+<div class="highlight"><pre><span></span><span class="c1">#performing calculations:</span>
 
 <span class="n">p_hiv</span> <span class="o">=</span> <span class="o">.</span><span class="mo">015</span> <span class="c1">#P(HIV) assuming 1.5% of the population has HIV</span>
 
@@ -163,11 +163,11 @@
 </pre></div>
 
 
-<p>Using this prior we can calculate our posterior probalities as follows:</p>
+<p>Using this prior we can calculate our posterior probabilities as follows:</p>
 <p>The probability of an individual having HIV given their test result is positive.</p>
-<p><code>P(D|Positive) = (P(HIV) * Sensitivity)) / P(Positive)</code></p>
+<p><code>P(HIV|Positive) = (P(HIV) * Sensitivity)) / P(Positive)</code></p>
 <p>The probability of an individual not having HIV given their test result is positive.</p>
-<p><code>P(~D|Positive) = (P(~HIV) * (1-Sensitivity))) / P(Positive)</code></p>
+<p><code>P(~HIV|Positive) = (P(~HIV) * (1-Sensitivity))) / P(Positive)</code></p>
 <p><strong>Note: the sum of posteriors must equal one because combined they capture all possible states within our set of probabilities.</strong></p>
 <h2>Calculations - Posteriors</h2>
 <div class="highlight"><pre><span></span><span class="c1">#P(HIV | Positive)</span>
@@ -194,7 +194,7 @@
 
 
 <h2>Conclusion</h2>
-<p>That's it! We've just demonstrated how to calculate Bayes theorem from scrath. In our toy example we showed that if an individual gets a positive test result the probability this individual has HIV is 22.5% and 77.5% that they do not have HIV. We can check the validity of our results by summing the probability of both cases:</p>
+<p>That's it! We've just demonstrated how to calculate Bayes' theorem from scratch. In our illustrative example we showed that if an individual gets a positive test result the probability this individual has HIV is 22.5% and 77.5% that they do not have HIV. We can check the validity of our results by summing the probability of both cases:</p>
 <div class="highlight"><pre><span></span><span class="n">posterior_sum</span> <span class="o">=</span> <span class="n">p_no_hiv_positive</span> <span class="o">+</span> <span class="n">p_hiv_positive</span>
 <span class="n">posterior_sum</span> <span class="c1">#sum to 1, looks good!</span>
 </pre></div>

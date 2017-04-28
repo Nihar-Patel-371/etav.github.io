@@ -223,7 +223,7 @@
 </div>
 
 <h2>2.1 Enter Bag of Words</h2>
-<p>Since we're dealing with text data and the naive bayes classifier is better suited to having numerial data as inputs we will need to perform transformations. To accomplish this we'll use the ("bag of words")[https://en.wikipedia.org/wiki/Bag-of-words_model] method to count the frequency of occurance for each word. Note: the bag of word methods assumes equal weight for all words in our "bag" and does not consider the order of occurance for words.</p>
+<p>Since we're dealing with text data and the naive bayes classifier is better suited to having numerical data as inputs we will need to perform transformations. To accomplish this we'll use the ("bag of words")[https://en.wikipedia.org/wiki/Bag-of-words_model] method to count the frequency of occurance for each word. Note: the bag of word methods assumes equal weight for all words in our "bag" and does not consider the order of occurance for words.</p>
 <p>There are modules that will do this for us but we will implement bag of words from scratch to understand what's happening under the hood.</p>
 <p>The steps are as follow:
 1. Convert bag of words to lowercase.
@@ -438,8 +438,8 @@ Our testing set contains 1393 observations
 
 
 <h2>4.1 Implementing Baye's Theorem from Scratch</h2>
-<p>Baye's theorem calculates the probability of a given class or state given the joint-probability distribution of the input variables (betas). There are numerous libraries which take care of this for us native to python and R but in order to understand what's happening behind the scenes let's calculate bayes theorem from scratch.</p>
-<p>Here we'll create a ficticuous world in which we're testing patients for HIV.</p>
+<p>Bayes' theorem calculates the probability of a given class or state given the joint-probability distribution of the input variables (betas). There are numerous libraries which take care of this for us native to python and R but in order to understand what's happening behind the scenes let's calculate bayes theorem from scratch.</p>
+<p>Here we'll create a fictitious world in which we're testing patients for HIV.</p>
 <p><strong>P(HIV)</strong> = The odds of a person having HIV is .015 or 1.5%</p>
 <p><strong>P(Positive)</strong> = The probability the test results are positive</p>
 <p><strong>P(Negative)</strong> = The probability the test results are negative.</p>
@@ -448,15 +448,15 @@ Our testing set contains 1393 observations
 <p>Baye's Formula:</p>
 <p><img alt="img" src="http://www.idgconnect.com/IMG/313/9313/formula-image.jpg"></p>
 <p>Where:
-- <code>P(A)</code> is the probability of A occuring independently, for us this is <code>P(HIV)</code>.
-- <code>P(B)</code> is the probability of B occuring independently, for us this is <code>P(Positive)</code>.
-- <code>P(A|B)</code> is the posterior probability of A occuring given B occurs, for us this is <code>P(HIV | Positive)</code>. This is the probability that an individual has HIV given their test results are positive and what we're trying to calculate.
-- <code>P(B|A)</code> is the likelihood probability of B occuring, given A occus. In our example this is <code>P(Positive | HIV)</code>. This value is given to us.</p>
-<p>Strining these together we get:</p>
+- <code>P(A)</code> is the probability of A occurring independently, for us this is <code>P(HIV)</code>.
+- <code>P(B)</code> is the probability of B occurring independently, for us this is <code>P(Positive)</code>.
+- <code>P(A|B)</code> is the posterior probability of A occurring given B occurs, for us this is <code>P(HIV | Positive)</code>. This is the probability that an individual has HIV given their test results are positive and what we're trying to calculate.
+- <code>P(B|A)</code> is the likelihood probability of B occurring, given A occurs. In our example this is <code>P(Positive | HIV)</code>. This value is given to us.</p>
+<p>Stringing these together we get:</p>
 <p><code>P(HIV | Positive) = ((P(HIV) * P(Positive | HIV)) / P(Positive)</code></p>
 <p>Thus the probability of getting a positive HIV test result <code>P(HIV)</code> becomes:</p>
 <p><code>P(Positive) = [P(HIV) * Sensitivity] + [P(~HIV) * (1-Specificity)]</code></p>
-<div class="highlight"><pre><span></span><span class="c1">#perfoming calculations:</span>
+<div class="highlight"><pre><span></span><span class="c1">#performing calculations:</span>
 
 
 <span class="n">p_hiv</span> <span class="o">=</span> <span class="o">.</span><span class="mo">015</span> <span class="c1">#P(HIV) assuming 1.5% of the population has HIV</span>
@@ -477,7 +477,7 @@ Our testing set contains 1393 observations
 </pre></div>
 
 
-<p>Using this prior we can calculate our posterior probalities as follows:</p>
+<p>Using this prior we can calculate our posterior probabilities as follows:</p>
 <p>The probability of an individual having HIV given their test result is positive.</p>
 <p><code>P(D|Positive) = (P(HIV) * Sensitivity)) / P(Positive)</code></p>
 <p>The probability of an individual not having HIV given their test result is positive.</p>
@@ -506,7 +506,7 @@ Our testing set contains 1393 observations
 </pre></div>
 
 
-<p>That's it! We've just demonstrated how to calculate Bayes theorem from scrath. In our toy example we showed that if an individual gets a positive test result the probability this individual has HIV is 22.5% and 77.5% that they do not have HIV. We can check the validity of our results by summing the probability of both cases:</p>
+<p>That's it! We've just demonstrated how to calculate Bayes theorem from scratch. In our toy example we showed that if an individual gets a positive test result the probability this individual has HIV is 22.5% and 77.5% that they do not have HIV. We can check the validity of our results by summing the probability of both cases:</p>
 <div class="highlight"><pre><span></span><span class="n">posterior_sum</span> <span class="o">=</span> <span class="n">p_no_hiv_positive</span> <span class="o">+</span> <span class="n">p_hiv_positive</span>
 <span class="n">posterior_sum</span> <span class="c1">#sum to 1, looks good!</span>
 </pre></div>
@@ -518,7 +518,7 @@ Our testing set contains 1393 observations
 
 <h2>5.1 Naive Bayes Classifier using Scikit-Learn</h2>
 <p>In the above example we only the probability given two inputs (the test result and the status of the disease in the patient). This calculation would grow exponentially more complex given numerous inputs and would be painstaking to calculate by hand. Don't worry, SciKit-Learn is here to save the day (and a ton of time)!</p>
-<p>Our spam classifier will use multinomial naive bayes method from <code>sklearn.nive_bayes</code>. This method is well-suited for for discrete inputs (like word counts) whereas the Gaussian Naive Bayes classifier performs better on continuous inputs.</p>
+<p>Our spam classifier will use multinomial naive Bayes method from <code>sklearn.nive_bayes</code>. This method is well-suited for for discrete inputs (like word counts) whereas the Gaussian Naive Bayes classifier performs better on continuous inputs.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
 <span class="n">naive_bayes</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span> <span class="c1">#call the method</span>
 <span class="n">naive_bayes</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> <span class="c1">#train the classifier on the training set</span>
