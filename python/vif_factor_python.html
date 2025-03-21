@@ -312,7 +312,8 @@
 <h2>Step 1: Run a multiple regression</h2>
 <div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">capture</span>
 <span class="c1">#gather features</span>
-<span class="n">features</span> <span class="o">=</span> <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">-</span> <span class="p">[</span><span class="s2">&quot;annual_inc&quot;</span><span class="p">])</span>
+<span class="n">features</span> <span class="o">=</span> <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;annual_inc&quot;</span><span class="p">]])</span>
+
 
 <span class="c1"># get y and X dataframes based on this regression:</span>
 <span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;annual_inc ~&#39;</span> <span class="o">+</span> <span class="n">features</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
